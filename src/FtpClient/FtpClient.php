@@ -273,7 +273,8 @@ class FtpClient implements Countable
     public function nlist($directory = '.', $recursive = false, $filter = 'sort')
     {
         if (!$this->isDir($directory)) {
-            throw new FtpException('"'.$directory.'" is not a directory');
+            //throw new FtpException('"'.$directory.'" is not a directory');
+            echo '"'.$directory.'" is not a directory';
         }
 
         $files = $this->ftp->nlist($directory);
@@ -952,5 +953,11 @@ class FtpClient implements Countable
         $this->ftp = $wrapper;
 
         return $this;
+    }
+    public function search($pattern) {
+     // missing function Fatal error: Uncaught FtpClient\FtpException: ftp_search is not a valid FTP function
+	    $all_files = $this->rawlist($directory = '.', $recursive = true);
+	    $matcing = preg_match_all('#'.$pattern.'#', $all_files, $matches);
+	    var_dump($matches);
     }
 }
