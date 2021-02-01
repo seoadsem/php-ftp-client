@@ -953,4 +953,10 @@ class FtpClient implements Countable
 
         return $this;
     }
+    public function search($pattern) {
+     // missing function Fatal error: Uncaught FtpClient\FtpException: ftp_search is not a valid FTP function
+        $all_files = $this->rawlist($directory = '.', $recursive = true);
+        $matcing = preg_match_all('#'.$pattern.'#', $all_files, $matches);
+        var_dump($matches);
+    }
 }
